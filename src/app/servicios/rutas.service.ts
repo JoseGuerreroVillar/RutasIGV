@@ -33,4 +33,37 @@ export class RutasService {
     );
   }
 
+  eliminar(indice: number): Observable<any> {
+    this.data.splice(indice, 1);
+    return Observable.create(
+      (observador: Observer<any>) => {
+        setTimeout(() => {
+          observador.next(0);
+        }, 500);
+      }
+    );
+  }
+
+  actualizar(rutas: IRutas, indice: number): Observable<any> {
+    this.data[indice] = rutas;
+    return Observable.create(
+      (observador: Observer<any>) => {
+        setTimeout(() => {
+          observador.next(true);
+        }, 500);
+      }
+    );
+  }
+
+  detallar(indice: number): Observable<IRutas> {
+    return Observable.create(
+      (observador: Observer<IRutas>) => {
+        setTimeout(() => {
+          const item = Object.assign({}, this.data[indice]);
+          observador.next(item);
+        }, 500);
+      }
+    );
+  }
+
 }

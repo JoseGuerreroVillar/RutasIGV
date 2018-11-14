@@ -22,7 +22,6 @@ export class RutasComponent implements OnInit {
     this.rutasService.listar()
       .subscribe(
       (datos: IRutas[]) => {
-        console.table(datos);
         this.listaRutas = datos;
       }
     );
@@ -33,5 +32,18 @@ export class RutasComponent implements OnInit {
       queryParams: { tit: "Nueva Ruta" },
       fragment: 'admin'
     });
+  }
+
+  eliminar(indice: number) {
+    if (confirm("¿Está seguro?")) {
+      this.rutasService.eliminar(indice)
+      .subscribe(
+        () => this.listar()
+      );
+    }
+  }
+
+  editar(indice: number) {
+    this.ruteador.navigate(["rutas/edicion", indice])
   }
 }
