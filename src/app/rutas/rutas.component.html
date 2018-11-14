@@ -1,3 +1,32 @@
-<p>
-  rutas works!
-</p>
+<div class="row">
+	<div class="col-6">
+
+		<button class="btn btn-success" (click)="nuevo()">Nuevo</button>
+
+		<table class="table table-striped table-hover" *ngIf="listaRutas && listaRutas.length; else NoHayDatos">
+			<thead>
+				<tr>
+					<th>Título</th>
+					<th>Estado</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor="let Rutas of listaRutas; let indice = index">
+					<td>{{Rutas.titulo}}</td>
+					<td>{{Rutas.estado}}</td>
+					<td>
+						<button class="btn btn-warning" (click)="editar(indice)">Editar</button>
+						<button class="btn btn-danger" (click)="eliminar(indice)">Eliminar</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<ng-template #NoHayDatos>
+			<div>No hay datos</div>
+		</ng-template>
+	</div>
+	<div class="col-6">
+		<router-outlet></router-outlet>
+	</div>
+</div>

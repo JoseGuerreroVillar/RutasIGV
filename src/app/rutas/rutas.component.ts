@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { IRutas } from '../modelos/rutas.interface';
+import { RutasService } from '../servicios/rutas.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-rutas',
@@ -7,9 +10,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RutasComponent implements OnInit {
 
-  constructor() { }
+  listaRutas: IRutas[];
+
+  constructor(private rutasService: RutasService, private ruteador: Router) { }
 
   ngOnInit() {
+    this.listar();
   }
 
+  listar() {
+    this.rutasService.listar()
+      .subscribe(
+      (datos: IRutas[]) => {
+        console.table(datos);
+        this.listaRutas = datos;
+      }
+    );
+  }
+
+  nuevo() {
+    this.ruteador.navigate(['rutas/nuevo'], {
+      queryParams: { tit: "Nueva Ruta" },
+      fragment: 'admin'
+    });
+  }
 }

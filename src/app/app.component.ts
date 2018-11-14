@@ -7,7 +7,7 @@ import { AutentificacionService } from './servicios/autentificacion.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'MiRutaIGV';
+  title = 'MiRutaIGP';
 
   usuarioLogueado: boolean = false;
 
